@@ -4,7 +4,6 @@ import { dbInit } from './db/connect';
 const port = process.env.PORT;
 if (!port) throw new Error('A key in environement is not defined : PORT');
 
-
 app.listen(port, async () => {
     console.log('1. Our server started successfully ✅');
 
