@@ -3,6 +3,8 @@ services:
     container_name: server
     build:
       context: .
+    networks:
+      - my_network
     environment:
       NODE_ENV: production
       PRIVATE_KEY: super_private_key#
@@ -11,13 +13,12 @@ services:
       API_URI: http://5.189.158.182:9000
       DB_USER: root
       DB_PASSWORD: brightkyefoo
-
     ports:
-      - '9000:9000'
+      - 9000:9000
     depends_on:
       - db
 
-  db:
+  mongo_server:
     container_name: mongo_server
     image: mongo
     restart: always
@@ -25,8 +26,16 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: brightkyefoo
     ports:
-      - '27017:27017'
+      - 27017:27017
     volumes:
       - mongodb_data:/data/db
+    networks:
+      - my_network
+
+
 volumes:
   mongodb_data:
+
+networks:
+  my_network:
+    driver: bridge
