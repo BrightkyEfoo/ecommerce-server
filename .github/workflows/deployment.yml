@@ -2,7 +2,7 @@ on:
   workflow_dispatch:
 env:
   NODE_VERSION: '21.x'
-  FOLDER: /applications/e-commerce/server
+  FOLDER: /home/brightky/applications/e-commerce/server
   IMAGE: server
   IMAGE_VERSION: latest
 permissions:
