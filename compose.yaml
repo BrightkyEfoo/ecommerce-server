@@ -1,9 +1,14 @@
 services:
   server:
     build:
-      context: .
+      image: server:latest
     environment:
       NODE_ENV: production
+      PRIVATE_KEY: ${PRIVATE_KEY}
+      DB_URI: ${DB_URI}
+      PORT: ${PORT}
+      API_URI: ${API_URI}
+
     ports:
       - 9000:9000
     depends_on:
