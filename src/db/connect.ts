@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 export const dbInit = async () => {
     try {
         if (!process.env.DB_URI || !process.env.DB_USER || !process.env.DB_PASSWORD) {
+            console.error('some env variable are required, please verify DB_URI, DB_USER, DB_PASSWORD');
             return false;
         }
         await mongoose.connect(process.env.DB_URI, {
