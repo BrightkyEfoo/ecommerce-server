@@ -114,10 +114,10 @@ jobs:
             docker compose -f ${{ env.FOLDER }}/compose.yaml stop
             docker compose -f ${{ env.FOLDER }}/compose.yaml rm -f
 
-            echo DB_URI=mongodb://root:brightkyefoo@localhost:27017/ecommerce?authSource=admin >> ${{ env.FOLDER }}/.env
-            echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} >> ${{ env.FOLDER }}/.env
+            echo DB_URI=mongodb://root:brightkyefoo@localhost:27017/ecommerce >> ${{ env.FOLDER }}/.env
+            echo PRIVATE_KEY=super_private_key# >> ${{ env.FOLDER }}/.env
             echo PORT=9000 >> ${{ env.FOLDER }}/.env
-            echo API_URI=${{ secrets.API_URI }} >> ${{ env.FOLDER }}/.env
+            echo API_URI=http://localhost:9000 >> ${{ env.FOLDER }}/.env
             
             docker compose -f ${{ env.FOLDER }}/compose.yaml up -d
 
