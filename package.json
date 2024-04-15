@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/app.js",
   "scripts": {
-    "start": "npm run build && node dist/src/app.js",
+    "start": "node dist/src/app.js",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "build": "rimraf -rf dist && tsc && cpy ./files ./dist",
