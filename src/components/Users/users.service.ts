@@ -8,7 +8,7 @@ const create = async (user: IUser) => {
         const newUser = await Users.create(user);
         delete newUser.password;
         return newUser;
-    } catch (e) {
+    } catch (e: any) {
         console.error(`Error when trying to save user to db \nReason:${e}`);
         return 1 as const;
     }
@@ -44,7 +44,7 @@ const login = async (credentials: { email: string; password: string }) => {
         const userCopy = user.toJSON();
         delete userCopy.password;
         return userCopy;
-    } catch (e) {
+    } catch (e: any) {
         throw new AppError('ERROR', 'unknown Error', false);
     }
 };

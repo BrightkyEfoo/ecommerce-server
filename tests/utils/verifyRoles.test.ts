@@ -27,7 +27,7 @@ describe('verify roles', () => {
     });
 
     it('It sould return true if empty roles', () => {
-        const userRoles = [];
+        const userRoles: any[] = [];
         const wantedRoles: TPermission[] = [{
             obj: 'products',
             permissions: ['create'],

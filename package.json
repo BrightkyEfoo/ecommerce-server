@@ -7,7 +7,7 @@
     "start": "node dist/src/app.js",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "build": "rimraf -rf dist && tsc && cpy ./files ./dist",
+    "build": "rimraf -rf dist && tsc",
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts ppp --template=js"
   },
   "keywords": [],

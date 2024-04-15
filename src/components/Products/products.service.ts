@@ -3,7 +3,7 @@ import { IProduct, Products } from './products.model';
 const create = async (product: IProduct) => {
     try {
         return await Products.create(product);
-    } catch (error) {
+    } catch (error: any) {
         console.error(`Error when storing a product to db \nReason : ${error}`);
         return 1 as const;
     }
@@ -14,7 +14,7 @@ const deleteProduct = async (id: string) => {
         const res = await Products.findByIdAndDelete(id);
         if (!res) return 1 as const;
         return res;
-    } catch (error) {
+    } catch (error: any) {
         console.error(`Error when deleting a product to db \nReason : ${error}`);
         return 1 as const;
     }
@@ -27,7 +27,7 @@ const updateProduct = async (id: string, updateObj: any) => {
         });
         if (!res) return 1 as const;
         return res;
-    } catch (error) {
+    } catch (error: any) {
         console.error(`Error when updating a product to db \nReason : ${error}`);
         return 1 as const;
     }
@@ -41,7 +41,7 @@ const searchProducts = async (str: string) => {
                 $caseSensitive: false,
             },
         }).exec();
-    } catch (e) {
+    } catch (e: any) {
         console.error(`An error occurred while searching for products: ${e.message}`);
         return 1 as const;
     }

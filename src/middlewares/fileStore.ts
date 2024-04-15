@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-const uploadSingle = (fieldName: string) => (req, res, next) => {
+const uploadSingle = (fieldName: string) => (req: Request, res: Response, next: NextFunction) => {
     upload.single(fieldName)(req, res, (err) => {
         console.log('here');
         if (err instanceof multer.MulterError) {
@@ -30,7 +30,7 @@ const uploadSingle = (fieldName: string) => (req, res, next) => {
         next();
     });
 };
-const uploadM = (req, res, next) => {
+const uploadM = (req: Request, res: Response, next: NextFunction) => {
     upload.fields([
         { name: 'thumbnail', maxCount: 1 }, // Un seul fichier pour le champ "thumbnail"
         { name: 'images', maxCount: 10 }, // Jusqu'à 10 fichiers pour le champ "images"
@@ -55,19 +55,20 @@ const hydradeBody = async (req: Request, res: Response, next: NextFunction) => {
         console.log(req.body);
         if (!req.body.update) req.body.update = {};
 
-        if (req.files) {
-            Object.keys(req.files).forEach(key => {
-                if (req.files) {
-                    if (req.files[key].length > 1 || key.endsWith('s')) {
-                        req.body[key] = req.files[key].map(file => {
+        const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+        if (files) {
+            Object.keys(files).forEach(key => {
+                if (files) {
+                    if (files[key].length > 1 || key.endsWith('s')) {
+                        req.body[key] = files[key].map(file => {
                             return `${process.env.API_URI}/${file.path}`;
                         });
-                        req.body.update[key] = req.files[key].map(file => {
+                        req.body.update[key] = files[key].map(file => {
                             return `${process.env.API_URI}/${file.path}`;
                         });
-                    } else if (req.files[key].length === 1) {
-                        req.body[key] = `${process.env.API_URI}/${req.files[key][0].path}`;
-                        req.body.update[key] = `${process.env.API_URI}/${req.files[key][0].path}`;
+                    } else if (files[key].length === 1) {
+                        req.body[key] = `${process.env.API_URI}/${files[key][0].path}`;
+                        req.body.update[key] = `${process.env.API_URI}/${files[key][0].path}`;
                     }
                 }
             });
@@ -77,7 +78,7 @@ const hydradeBody = async (req: Request, res: Response, next: NextFunction) => {
         }
 
         next();
-    } catch (err) {
+    } catch (err: any) {
         if (err.name === 'SyntaxError') {
             console.log('err');
             return next(new AppError('BAD_ENTRY', `body is not provided or inconsitent, it should be a valid JSON string`, true));
@@ -122,7 +123,7 @@ export { upload, uploadM, hydradeBody, uploadSingle };
 //           }
 //         });
 //         console.log('Réponse du serveur:', response.data);
-//       } catch (error) {
+//       } catch (error: any) {
 //         console.error('Erreur lors de l\'envoi du formulaire:', error);
 //       }
 //     };

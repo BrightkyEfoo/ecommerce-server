@@ -19,7 +19,7 @@ const create = async (
             ));
         }
         res.status(201).json({ msg: 'successfully created a new category', category: newCategory });
-    } catch (err) {
+    } catch (err: any) {
         const error = AppError.isAppError(err)
             ? err
             : new AppError('ERROR', `Unknown error \nReason : ${err}`, false);
@@ -37,7 +37,7 @@ const listProductsByCategory = async (
         const limit = Number(req.query.limit as string) ?? 10;
         const page = Number(req.query.page) ?? 1;
         const category = await categoriesService.read(req.params.id);
-        if (category === 1) {
+        if (!category || category === 1) {
             return next(new AppError(
                 'NOT_FOUND',
                 `Can not find category, ask for administrator`,
@@ -74,7 +74,7 @@ const listProductsByCategory = async (
             limit,
             total: resProducts.length,
         });
-    } catch (err) {
+    } catch (err: any) {
         const error = AppError.isAppError(err)
             ? err
             : new AppError('ERROR', `Unknown error \nReason : ${err}`, false);
@@ -107,7 +107,7 @@ const readbyId = async (
             msg: 'success',
             category,
         });
-    } catch (err) {
+    } catch (err: any) {
         const error = AppError.isAppError(err)
             ? err
             : new AppError('ERROR', `Unknown error \nReason : ${err}`, false);
@@ -139,7 +139,7 @@ const update = async (
             msg: 'succesfully update category',
             category: updatedCategory,
         });
-    } catch (err) {
+    } catch (err: any) {
         const error = AppError.isAppError(err)
             ? err
             : new AppError('ERROR', `Unknown error \nReason : ${err}`, false);
@@ -171,7 +171,7 @@ const deleteCatgory = async (
             msg: 'Succesfully delete',
             count: categoryDeleted,
         });
-    } catch (err) {
+    } catch (err: any) {
         const error = AppError.isAppError(err)
             ? err
             : new AppError('ERROR', `Unknown error \nReason : ${err}`, false);
@@ -209,7 +209,7 @@ const listCategories = async (
             limit,
             total: count,
         });
-    } catch (err) {
+    } catch (err: any) {
         const error = AppError.isAppError(err)
             ? err
             : new AppError('ERROR', `Unknown error \nReason : ${err}`, false);

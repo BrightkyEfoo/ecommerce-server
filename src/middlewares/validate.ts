@@ -14,7 +14,7 @@ const validate =
                 };
                 schema.parse(object);
                 next();
-            } catch (e) {
+            } catch (e: any) {
                 res.status(400).json({
                     msg: 'Something went wrong on validation',
                     resaon: generateErrorMessage(e.issues),

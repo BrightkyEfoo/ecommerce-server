@@ -33,7 +33,7 @@ const createProduct = async (
             msg: 'successfully created a new product',
             product: newProduct,
         });
-    } catch (err) {
+    } catch (err: any) {
         const error = AppError.isAppError(err)
             ? err
             : new AppError('ERROR', `Unknown error \nReason : ${err}`, false);
@@ -59,7 +59,7 @@ const deleteProduct = async (
             msg: 'successfully deleted a product',
             product: deletedProduct,
         });
-    } catch (err) {
+    } catch (err: any) {
         const error = AppError.isAppError(err)
             ? err
             : new AppError('ERROR', `Unknown error \nReason : ${err}`, false);
@@ -106,7 +106,7 @@ const updateProduct = async (
             msg: 'successfully updated a product',
             product: updatedProduct,
         });
-    } catch (err) {
+    } catch (err: any) {
         const error = AppError.isAppError(err)
             ? err
             : new AppError('ERROR', `Unknown error \nReason : ${err}`, false);
@@ -130,7 +130,7 @@ const readProduct = async (req: Request, res: Response, next: NextFunction) => {
             msg: 'successfully founded a product',
             product: foundedProduct,
         });
-    } catch (err) {
+    } catch (err: any) {
         const error = AppError.isAppError(err)
             ? err
             : new AppError('ERROR', `Unknown error \nReason : ${err}`, false);
@@ -155,7 +155,7 @@ const searchProducts = async (
                 true,
             ));
 
-        const foundedProducts = await productsService.search(q, Number(limit), page);
+        const foundedProducts = await productsService.search(q);
         if (foundedProducts === 1) {
             return next(new AppError(
                 'BAD_ENTRY',
@@ -180,7 +180,7 @@ const searchProducts = async (
             limit,
             total: foundedProducts.length,
         });
-    } catch (err) {
+    } catch (err: any) {
         const error = AppError.isAppError(err)
             ? err
             : new AppError('ERROR', `Unknown error \nReason : ${err}`, false);
@@ -228,7 +228,7 @@ const readProducts = async (
             limit,
             total: count,
         });
-    } catch (err) {
+    } catch (err: any) {
         const error = AppError.isAppError(err)
             ? err
             : new AppError('ERROR', `Unknown error \nReason : ${err}`, false);

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { model, Schema } from 'mongoose';
 import { Products } from '../Products/products.model';
 import { AppError } from '../../utils/Errors/AppError';

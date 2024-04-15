@@ -3,7 +3,7 @@ import { Categories, ICategory } from './categories.model';
 const createCategory = async (category: ICategory) => {
     try {
         return (await Categories.create(category)).toJSON();
-    } catch (e) {
+    } catch (e: any) {
         console.error(`Error when creating a new category \nReason: ${e}`);
         return 1 as const;
     }
@@ -12,7 +12,7 @@ const createCategory = async (category: ICategory) => {
 const deleteCategory = async (id: string) => {
     try {
         return await Categories.findByIdAndDelete(id);
-    } catch (err) {
+    } catch (err: any) {
         console.error(`Error when deleting a category \nReason: ${err}`);
         return 1 as const;
     }
@@ -24,7 +24,7 @@ const update = async (id: string, update: any) => {
         console.log('res', res);
         return res;
 
-    } catch (err) {
+    } catch (err: any) {
         console.error(`Error when updating a category \nReason: ${err}`);
         return 1 as const;
     }
@@ -33,7 +33,7 @@ const update = async (id: string, update: any) => {
 const read = async (id: string) => {
     try {
         return await Categories.findById(id);
-    } catch (err) {
+    } catch (err: any) {
         console.error(`Error when try to read a category \nReason: ${err}`);
         return 1 as const;
     }

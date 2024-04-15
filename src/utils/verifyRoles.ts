@@ -4,6 +4,7 @@ const verifyRoles = (userRoles: number [], roles: TPermission[]): boolean => {
     const URoles = userRoles.map(r => {
         if (Roles[r]) return Roles[r];
     }).flatMap(el => el).map(role => {
+        if (!role) return [] as any[];
         const obj = role.obj;
         return role.permissions.map(p => {
             return { obj, permission: p };

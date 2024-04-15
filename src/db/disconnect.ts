@@ -4,7 +4,7 @@ const disconnect = async () => {
   try {
     await mongoose.disconnect();
     console.log('db disconnected sucesfully');
-  } catch (error) {
+  } catch (error: any) {
     console.error(`Error when try to disconnect db \n Reason : ${error}`);
   }
 };

@@ -16,7 +16,7 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
             msg: 'successfully created a new user',
             user: userRes,
         });
-    } catch (err) {
+    } catch (err: any) {
         const error = AppError.isAppError(err)
             ? err
             : new AppError('ERROR', `Unknown error \nReason : ${err}`, false);
@@ -62,7 +62,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
             token,
             user: loginResponse,
         });
-    } catch (err) {
+    } catch (err: any) {
         const error = AppError.isAppError(err)
             ? err
             : new AppError('ERROR', `Unknown error \nReason : ${err}`, false);
@@ -86,7 +86,7 @@ const addCart = async (req: Request, res: Response, next: NextFunction) => {
 
         return res.status(201).json({ msg: 'success', cart: newCart });
 
-    } catch (err) {
+    } catch (err: any) {
         const error = AppError.isAppError(err)
             ? err
             : new AppError('ERROR', `Unknown error \nReason : ${err}`, true);
@@ -130,6 +130,7 @@ const listCarts = async (req: Request, res: Response, next: NextFunction) => {
 
         const data = carts.map((cart) => {
             const products = cart.toJSON().products.map(p => {
+                // @ts-ignore
                 return { ...p.product, quantity: p.quantity };
             });
             return { ...cart.toJSON(), products };
@@ -137,7 +138,7 @@ const listCarts = async (req: Request, res: Response, next: NextFunction) => {
 
         return res.json({ msg: 'success', carts: data, total: carts.length, skip, limit });
 
-    } catch (err) {
+    } catch (err: any) {
         const error = AppError.isAppError(err)
             ? err
             : new AppError('ERROR', `Unknown error \nReason : ${err}`, true);
