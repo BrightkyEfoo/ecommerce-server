@@ -1,5 +1,6 @@
 import { Users } from '../components/Users/users.model';
-import { IProduct } from '../components/Products/products.model';
+import { IProduct, Products } from '../components/Products/products.model';
+import { Categories, ICategory } from '../components/categories/categories.model';
 
 const products: ({
     discountPercentage: number;
@@ -12,17 +13,6 @@ const products: ({
     stock: number;
     category: string;
     brand: string
-} | {
-    discountPercentage: string;
-    thumbnail: string;
-    images: string[];
-    price: string;
-    rating: string;
-    description: string;
-    title: string;
-    stock: string;
-    category: string;
-    brand: string
 })[] = [
     {
         'title': 'Sony WH-1000XM4 Noise Cancelling Headphones',
@@ -32,12 +22,11 @@ const products: ({
         'rating': 4.8,
         'stock': 215,
         'brand': 'Sony',
-        'category': 'audio',
-        'thumbnail': 'https://m.media-amazon.com/images/I/819z2z5bLPL._AC_UF1000,1000_QL80_.jpg',
+        'category': 'Audio',
+        'thumbnail': 'https://media.wired.com/photos/5f2b2e792f0075bf6e0a1de6/3:2/w_2400,h_1600,c_limit/Gear-Sony-WH-1000XM4-1-SOURCE-Sony.jpg',
         'images': [
-            'https://m.media-amazon.com/images/I/819z2z5bLPL._AC_UF1000,1000_QL80_.jpg',
-            'https://m.media-amazon.com/images/I/7113H27z7zL._AC_UF1000,1000_QL80_.jpg',
-            'https://m.media-amazon.com/images/I/71-14zF8y1L._AC_UF1000,1000_QL80_.jpg',
+            'https://media.wired.com/photos/5f2b2e792f0075bf6e0a1de6/3:2/w_2400,h_1600,c_limit/Gear-Sony-WH-1000XM4-1-SOURCE-Sony.jpg',
+            'https://media.cnn.com/api/v1/images/stellar/prod/200821121551-underscored-best-anc-headphones-lead.jpg',
         ],
     },
     {
@@ -48,11 +37,11 @@ const products: ({
         'rating': 4.3,
         'stock': 32,
         'brand': 'Samsung',
-        'category': 'monitors',
-        'thumbnail': 'https://images.samsung.com/is/image/samsung/p5img/se/odyssey/G9/odyssey-g9-lc49g95tssn-lr-front-silver.jpg',
+        'category': 'Monitor',
+        'thumbnail': 'https://images.samsung.com/is/image/samsung/p6pim/au/lc49g95tssexxy/gallery/au-odyssey-g9-c49g95t-lc49g95tssexxy-532120977?$650_519_PNG',
         'images': [
-            'https://images.samsung.com/is/image/samsung/p5img/se/odyssey/G9/odyssey-g9-lc49g95tssn-lr-side-silver.jpg',
-            'https://images.samsung.com/is/image/samsung/p5img/se/odyssey/G9/odyssey-g9-lc49g95tssn-lr-back-silver.jpg',
+            'https://images.samsung.com/is/image/samsung/p6pim/au/lc49g95tssexxy/gallery/au-odyssey-g9-c49g95t-lc49g95tssexxy-532120977?$650_519_PNG',
+            'https://images.samsung.com/is/image/samsung/p6pim/au/lc49g95tssexxy/gallery/au-odyssey-g9-c49g95t-lc49g95tssexxy-532120977?$650_519_PNG$',
         ],
     },
     {
@@ -63,156 +52,119 @@ const products: ({
         'rating': 4.5,
         'stock': 142,
         'brand': 'Google',
-        'category': 'networking',
-        'thumbnail': '(https://store.google.com/museum/product/nest-wifi',
+        'category': 'Networking',
+        'thumbnail': 'https://crdms.images.consumerreports.org/prod/products/cr/models/400063-mesh-wifi-google-nest-wifi-3-pack-10009019.png',
         'images': [
-            'https://store.google.com/museum/product/nest-wifi',
+            'https://crdms.images.consumerreports.org/prod/products/cr/models/400063-mesh-wifi-google-nest-wifi-3-pack-10009019.png',
+            'https://fscl01.fonpit.de/userfiles/7446224/image/google-nest-wifi/AndroidPIT-google-nest-wifi-router-repeater.jpg',
         ],
     },
     {
-        'title': 'Computer',
-        'description': 'Example description for a computer.',
-        'price': '1000',
-        'discountPercentage': '10.5',
-        'rating': '4.5',
-        'brand': 'Example Brand',
-        'stock': '50',
-        'category': 'Electronics',
-        'thumbnail': 'http://example.com/computer-thumbnail.jpg',
+        'title': 'Apple Iphone 9',
+        'description': 'Upgrade your home Wi-Fi with the Google Nest Wifi Router. This mesh networking system blankets your entire home in strong, reliable Wi-Fi, eliminating dead zones and buffering. It\'s easy to set up and manage using the Google Home app.',
+        'price': 169.99,
+        'discountPercentage': 10.0,
+        'rating': 4.5,
+        'stock': 142,
+        'brand': 'Google',
+        'category': 'Phone',
+        'thumbnail': 'https://ss7.vzw.com/is/image/VerizonWireless/apple-iphone-15-pro-max-256gb-natural-titanium-mu683ll-a-b?wid=465&hei=465&fmt=webp',
         'images': [
-            'https://store.google.com/museum/product/nest-wifi',
+            'https://www.cnet.com/a/img/resize/0f37c88c746b755a97f770500419522be6f1da43/hub/2023/09/18/c44256ef-e6c1-41bb-b77b-648792f47c6c/iphone15-pro-64.jpg?auto=webp&fit=crop&height=900&width=1200',
+            'https://img.phonandroid.com/2023/01/iphone-15-pro-max-concept.jpg',
         ],
     },
     {
-        'title': 'Earphone',
-        'description': 'Example description for an earphone.',
-        'price': '50',
-        'discountPercentage': '0',
-        'rating': '3.8',
-        'brand': 'Example Brand',
-        'stock': '100',
-        'category': 'Electronics',
-        'thumbnail': 'http://example.com/earphone-thumbnail.jpg',
+        'title': 'Asus Rog',
+        'description': 'Upgrade your home Wi-Fi with the Google Nest Wifi Router. This mesh networking system blankets your entire home in strong, reliable Wi-Fi, eliminating dead zones and buffering. It\'s easy to set up and manage using the Google Home app.',
+        'price': 169.99,
+        'discountPercentage': 10.0,
+        'rating': 4.5,
+        'stock': 142,
+        'brand': 'Google',
+        'category': 'Computer',
+        'thumbnail': 'https://m.media-amazon.com/images/I/81fZmxBbQgL._AC_SL1500_.jpg',
         'images': [
-            'https://store.google.com/museum/product/nest-wifi',
+            'https://images.indianexpress.com/2022/07/Asus-ROG-Strix-Scar-17-review-9-1.jpg',
+            'https://www.notebookcheck.biz/uploads/tx_nbc2/oasahxv162owufac_setting_000_1_90_end_1000.jpg',
         ],
     },
     {
-        'title': 'RAM',
-        'description': 'Example description for a RAM.',
-        'price': '80',
-        'discountPercentage': '5',
-        'rating': '4.2',
-        'brand': 'Example Brand',
-        'stock': '20',
-        'category': 'Electronics',
-        'thumbnail': 'http://example.com/ram-thumbnail.jpg',
+        'title': 'Mac Book 2045',
+        'description': 'Upgrade your home Wi-Fi with the Google Nest Wifi Router. This mesh networking system blankets your entire home in strong, reliable Wi-Fi, eliminating dead zones and buffering. It\'s easy to set up and manage using the Google Home app.',
+        'price': 1698.99,
+        'discountPercentage': 10.0,
+        'rating': 4.5,
+        'stock': 142,
+        'brand': 'Apple',
+        'category': 'Computer',
+        'thumbnail': 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp16-spacegray-select-202110?wid=904&hei=840&fmt=jpeg&qlt=80&.v=1632788574000',
         'images': [
-            'https://store.google.com/museum/product/nest-wifi',
+            'https://imageio.forbes.com/specials-images/imageserve/5fd00ea644cd62376ce2b6c1/0x0.jpg?format=jpg&height=600&width=1200&fit=bounds',
+            'https://www.01net.com/app/uploads/2021/04/Apple-MacBook-Air-M1-face-1024x577.jpg',
         ],
     },
     {
-        'title': 'GPU',
-        'description': 'Example description for a GPU.',
-        'price': '500',
-        'discountPercentage': '15.3',
-        'rating': '4.9',
-        'brand': 'Example Brand',
-        'stock': '10',
-        'category': 'Electronics',
-        'thumbnail': 'http://example.com/gpu-thumbnail.jpg',
+        'title': 'Samsung S21 Ultra',
+        'description': 'Upgrade your home Wi-Fi with the Google Nest Wifi Router. This mesh networking system blankets your entire home in strong, reliable Wi-Fi, eliminating dead zones and buffering. It\'s easy to set up and manage using the Google Home app.',
+        'price': 2698.99,
+        'discountPercentage': 10.0,
+        'rating': 4.5,
+        'stock': 142,
+        'brand': 'Samsung',
+        'category': 'Phone',
+        'thumbnail': 'https://img-19.commentcamarche.net/KWGtZu6XwEiw-Hk8aOFn7V1BVWg=/480x335/smart/25728a9ea07b427d9871c9f1a6be0fa5/ccmcms-commentcamarche/39489444.jpg',
         'images': [
-            'https://store.google.com/museum/product/nest-wifi',
-        ],
-    },
-    {
-        'title': 'Computer',
-        'description': 'Example description for a computer.',
-        'price': '1000',
-        'discountPercentage': '10.5',
-        'rating': '4.5',
-        'brand': 'Example Brand',
-        'stock': '50',
-        'category': 'Electronics',
-        'thumbnail': 'http://example.com/computer-thumbnail.jpg',
-        'images': [
-            'https://store.google.com/museum/product/nest-wifi',
-        ],
-    },
-    {
-        'title': 'Earphone',
-        'description': 'Example description for an earphone.',
-        'price': '50',
-        'discountPercentage': '0',
-        'rating': '3.8',
-        'brand': 'Example Brand',
-        'stock': '100',
-        'category': 'Electronics',
-        'thumbnail': 'http://example.com/earphone-thumbnail.jpg',
-        'images': [
-            'https://store.google.com/museum/product/nest-wifi',
-        ],
-    },
-    {
-        'title': 'RAM',
-        'description': 'Example description for a RAM.',
-        'price': '80',
-        'discountPercentage': '5',
-        'rating': '4.2',
-        'brand': 'Example Brand',
-        'stock': '20',
-        'category': 'Electronics',
-        'thumbnail': 'http://example.com/ram-thumbnail.jpg',
-        'images': [
-            'https://store.google.com/museum/product/nest-wifi',
-        ],
-    },
-    {
-        'title': 'GPU',
-        'description': 'Example description for a GPU.',
-        'price': '500',
-        'discountPercentage': '15.3',
-        'rating': '4.9',
-        'brand': 'Example Brand',
-        'stock': '10',
-        'category': 'Electronics',
-        'thumbnail': 'http://example.com/gpu-thumbnail.jpg',
-        'images': [
-            'https://store.google.com/museum/product/nest-wifi',
-        ],
-    },
-    {
-        'title': 'Computer',
-        'description': 'Example description for a computer.',
-        'price': '1000',
-        'discountPercentage': '10.5',
-        'rating': '4.5',
-        'brand': 'Example Brand',
-        'stock': '50',
-        'category': 'Electronics',
-        'thumbnail': 'http://example.com/computer-thumbnail.jpg',
-        'images': [
-            'https://store.google.com/museum/product/nest-wifi',
-        ],
-    },
-    {
-        'title': 'Earphone',
-        'description': 'Example description for an earphone.',
-        'price': '50',
-        'discountPercentage': '0',
-        'rating': '3.8',
-        'brand': 'Example Brand',
-        'stock': '100',
-        'category': 'Electronics',
-        'thumbnail': 'http://example.com/earphone-thumbnail.jpg',
-        'images': [
-            'https://store.google.com/museum/product/nest-wifi',
+            'https://imageio.forbes.com/specials-images/imageserve/65aed5b43d58713217a6961e/IMG-1504/0x0.jpg?crop=2180,1453,x0,y0,safe&height=473&width=711&fit=bounds',
+            'https://www.livemint.com/lm-img/img/2024/01/17/600x338/sa_sung_galaxy_s24_ultra_1705519671976_1705519676738.jpg',
         ],
     },
 ];
 
+
+const categories: ICategory[] = [
+    {
+        title: 'Phone',
+        description: 'Upgrade your home Wi-Fi with the Google Nest Wifi Router. This mesh networking system blankets your entire hom',
+        image: 'https://www.zdnet.com/a/img/resize/76312f7f9e63dc1af788ced3ad22469b91f4e314/2023/08/22/71f6e0b9-3405-43ea-972c-202a7c8bf615/best-phones-zdnet-thumb-image.jpg?auto=webp&fit=crop&height=900&width=1200',
+    },
+    {
+        title: 'Computer',
+        description: 'Upgrade your home Wi-Fi with the Google Nest Wifi Router. This mesh networking system blankets your entire hom',
+        image: 'https://i.ebayimg.com/thumbs/images/g/y7UAAOSw8RdlZa7F/s-l1200.jpg',
+    },
+    {
+        title: 'Networking',
+        description: 'Upgrade your home Wi-Fi with the Google Nest Wifi Router. This mesh networking system blankets your entire hom',
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZWnv_lV8Ecj876I8ecgutG19L72-FqRx8R_9rfDVD&s',
+    },
+    {
+        title: 'Monitor',
+        description: 'Upgrade your home Wi-Fi with the Google Nest Wifi Router. This mesh networking system blankets your entire hom',
+        image: 'https://image.benq.com/is/image/benqco/monitor-all-series-kv-3-m?$ResponsivePreset$&fmt=png-alpha',
+    },
+    {
+        title: 'Audio',
+        description: 'Upgrade your home Wi-Fi with the Google Nest Wifi Router. This mesh networking system blankets your entire hom',
+        image: 'https://images.mlssoccer.com/image/private/t_editorial_landscape_8_desktop_mobile/mls/ezu7nroj7ucmx78qe3su.jpg',
+    },
+];
+
+
 const mock = async (index: number) => {
     await Users.findOneAndDelete({ email: 'brightefoo@gmail.com' });
+
+    const categories = [];
+
+    const catPromises = categories.map(async (category) => {
+        return await Categories.create(category);
+    });
+
+    await Promise.all(catPromises);
+
+    const prodPromises = products.map(async el => await Products.create(el));
+
+    await Promise.all(prodPromises);
 
     await Users.create({
         email: 'brightefoo@gmail.com',
