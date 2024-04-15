@@ -4,6 +4,8 @@ A simple API for managing an E-commerce
 
 this is just for test-purpose
 
+also available [here](https://documenter.getpostman.com/view/22207689/2sA3Bj7thh)
+
 made by [<i>@BrightkyEfoo</i>](https://github.com/BrightkyEfoo)
 
 # 📁 Folder: Users

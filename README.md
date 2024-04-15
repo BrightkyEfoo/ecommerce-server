@@ -45,7 +45,8 @@ The provided Postman collection offers comprehensive API documentation, includin
 * JSON data schemas for clear data structure understanding
 * Notes and instructions to guide your interaction
 
-You can see it [here](./api_doc.md)
+You can see it [here](./api_doc.md) or on postman
+website [here](https://documenter.getpostman.com/view/22207689/2sA3Bj7thh)
 
 ## **Accessing the API**
 
