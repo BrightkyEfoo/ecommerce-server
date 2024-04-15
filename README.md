@@ -5,6 +5,7 @@
 This API is built using Node.js and Express. It manages an e-commerce store, encompassing users, products, carts, and
 categories.
 Note that this is only for test-purposes
+Notice that and online version is available at [api](http://5.189.158.182:9000/)
 
 ## **Project Structure**
 
