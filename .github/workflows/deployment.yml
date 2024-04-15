@@ -56,7 +56,7 @@ jobs:
           tags: ${{env.IMAGE}}:${{env.IMAGE_VERSION}}
           outputs: type=docker,dest=/tmp/${{env.IMAGE}}.tar
       - name: Upload image artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{env.IMAGE}}
           path: /tmp/${{env.IMAGE}}.tar
@@ -67,7 +67,7 @@ jobs:
     needs: dockerize
     steps:
       - name: Download image artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: ${{env.IMAGE}}
           path: .
