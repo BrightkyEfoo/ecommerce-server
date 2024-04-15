@@ -179,9 +179,7 @@ const searchProducts = async (
                 true,
             ));
         }
-    ................
-        return;
-        res.json({
+        return res.json({
             msg: `Result of search in products for ${q}`,
             products: resultProducts,
             skip: start,
@@ -212,7 +210,7 @@ const readProducts = async (
             .exec();
 
         if (!foundedProducts) {
-            return next(new ApppError(
+            return next(new AppError(
                 'NOT_FOUND',
                 `Can not find products, ask for administrator`,
                 false,
