@@ -1,5 +1,6 @@
 services:
   server:
+    container_name: server
     image: server:latest
     environment:
       NODE_ENV: production
