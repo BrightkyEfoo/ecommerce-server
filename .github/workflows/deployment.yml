@@ -114,7 +114,7 @@ jobs:
             docker compose -f ${{ env.FOLDER }}/compose.yaml stop
             docker compose -f ${{ env.FOLDER }}/compose.yaml rm -f
 
-            echo DB_URI=mongodb://localhost:27017/ecommerce >> ${{ env.FOLDER }}/.env
+            echo DB_URI=mongodb://mongo_server:27017/ecommerce >> ${{ env.FOLDER }}/.env
             echo PRIVATE_KEY=super_private_key# >> ${{ env.FOLDER }}/.env
             echo PORT=9000 >> ${{ env.FOLDER }}/.env
             echo API_URI=http://localhost:9000 >> ${{ env.FOLDER }}/.env
