@@ -1,0 +1,20 @@
+services:
+  server:
+    build:
+      context: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 9000:9000
+    depends_on:
+      db
+
+  db:
+    mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: brightkyefoo
+    ports:
+      - 27017:27017
