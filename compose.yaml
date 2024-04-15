@@ -1,7 +1,6 @@
 services:
   server:
-    build:
-      image: server:latest
+    image: server:latest
     environment:
       NODE_ENV: production
       PRIVATE_KEY: super_private_key#
