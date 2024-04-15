@@ -36,6 +36,12 @@ router.route('/search')
         productsController.search,
     );
 
+router.route('/:id')
+    .get(
+        validate(productsZodSchemas.readById),
+        productsController.read,
+    );
+
 router.use(authToken)
     .route('/:id')
     .put(
@@ -65,11 +71,6 @@ router.use(authToken)
         productsController.delete,
     );
 
-router.route('/:id')
-    .get(
-        validate(productsZodSchemas.readById),
-        productsController.read,
-    );
 
 export { router as productsRouter };
 
