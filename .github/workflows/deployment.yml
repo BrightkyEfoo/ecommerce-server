@@ -99,7 +99,9 @@ jobs:
   run-container:
     name: 'Run container'
     runs-on: ubuntu-latest
-    needs: load-image
+    needs:
+      - load-image
+      - copy-configs
     steps:
       - name: Run container
         uses: appleboy/ssh-action@master
