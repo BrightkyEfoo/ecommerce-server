@@ -15,7 +15,7 @@ services:
     ports:
       - 9000:9000
     depends_on:
-      - db
+      - mongo_server
 
   mongo_server:
     container_name: mongo_server
