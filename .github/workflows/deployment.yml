@@ -1,5 +1,8 @@
 on:
   workflow_dispatch:
+  push:
+    branches:
+        - master
 env:
   NODE_VERSION: '21.x'
   FOLDER: /home/brightky/applications/e-commerce/server
