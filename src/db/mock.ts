@@ -154,8 +154,6 @@ const categories: ICategory[] = [
 const mock = async (index: number) => {
     await Users.findOneAndDelete({ email: 'brightefoo@gmail.com' });
 
-    const categories: any[] = [];
-
     const catPromises = categories.map(async (category) => {
         return await Categories.create(category);
     });
