@@ -34,8 +34,8 @@ const listProductsByCategory = async (
     next: NextFunction,
 ) => {
     try {
-        const limit = Number(req.query.limit as string) ?? 10;
-        const page = Number(req.query.page) ?? 1;
+        const limit = Number(req.query.limit as string) || 10;
+        const page = Number(req.query.page) || 1;
         const category = await categoriesService.read(req.params.id);
         if (!category || category === 1) {
             return next(new AppError(
@@ -185,8 +185,8 @@ const listCategories = async (
     next: NextFunction,
 ) => {
     try {
-        const limit = Number(req.query.limit as string) ?? 10;
-        const page = Number(req.query.page) ?? 1;
+        const limit = Number(req.query.limit as string) || 10;
+        const page = Number(req.query.page) || 1;
         const skip = (page - 1) * limit;
         const foundedCategories = await Categories.find()
             .limit(limit)

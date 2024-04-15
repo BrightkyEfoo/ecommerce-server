@@ -146,8 +146,8 @@ const searchProducts = async (
 ) => {
     try {
         const { q } = req.query;
-        const limit = Number(req.query.limit) ?? 10;
-        const page = Number(req.query.page) ?? 1;
+        const limit = Number(req.query.limit) || 10;
+        const page = Number(req.query.page) || 1;
         if (typeof q !== 'string')
             return next(new AppError(
                 'BAD_ENTRY',
@@ -179,7 +179,9 @@ const searchProducts = async (
                 true,
             ));
         }
-        return res.json({
+    ................
+        return;
+        res.json({
             msg: `Result of search in products for ${q}`,
             products: resultProducts,
             skip: start,
@@ -201,8 +203,8 @@ const readProducts = async (
     next: NextFunction,
 ) => {
     try {
-        const limit = Number(req.query.limit as string) ?? 10;
-        const page = Number(req.query.page) ?? 1;
+        const limit = Number(req.query.limit as string) || 10;
+        const page = Number(req.query.page) || 1;
         const skip = (page - 1) * limit;
         const foundedProducts = await Products.find()
             .limit(limit)
@@ -210,7 +212,7 @@ const readProducts = async (
             .exec();
 
         if (!foundedProducts) {
-            return next(new AppError(
+            return next(new ApppError(
                 'NOT_FOUND',
                 `Can not find products, ask for administrator`,
                 false,

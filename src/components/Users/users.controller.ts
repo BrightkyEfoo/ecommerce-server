@@ -96,8 +96,8 @@ const addCart = async (req: Request, res: Response, next: NextFunction) => {
 
 const listCarts = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const limit = Number(req.query.limit as string) ?? 10;
-        const page = Number(req.query.page) ?? 1;
+        const limit = Number(req.query.limit as string) || 10;
+        const page = Number(req.query.page) || 1;
         const skip = (page - 1) * limit;
         const id = req.params.id;
 
