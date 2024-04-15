@@ -118,6 +118,8 @@ jobs:
             echo PRIVATE_KEY=super_private_key# >> ${{ env.FOLDER }}/.env
             echo PORT=9000 >> ${{ env.FOLDER }}/.env
             echo API_URI=http://localhost:9000 >> ${{ env.FOLDER }}/.env
+            echo DB_USER=root >> ${{ env.FOLDER }}/.env
+            echo DB_PASSWORD=brightkyefoo >> ${{ env.FOLDER }}/.env
             
             docker compose -f ${{ env.FOLDER }}/compose.yaml up -d
 
