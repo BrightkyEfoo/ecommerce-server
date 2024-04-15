@@ -36,7 +36,6 @@ const listProductsByCategory = async (
     try {
         const limit = Number(req.query.limit as string) ?? 10;
         const page = Number(req.query.page) ?? 1;
-        const skip = (page - 1) * limit;
         const category = await categoriesService.read(req.params.id);
         if (category === 1) {
             return next(new AppError(
@@ -46,8 +45,6 @@ const listProductsByCategory = async (
             ));
         }
         const foundedProductsByCategory = await Products.find({ category: category.title })
-            .limit(limit)
-            .skip(skip)
             .exec();
 
         if (!foundedProductsByCategory) {
@@ -58,22 +55,24 @@ const listProductsByCategory = async (
             ));
         }
 
-        if (!foundedProductsByCategory || foundedProductsByCategory.length === 0) {
+        const start = limit * (page - 1);
+        const end = start + limit;
+        const resProducts = foundedProductsByCategory.slice(start, end);
+
+        if (!foundedProductsByCategory || foundedProductsByCategory.length === 0 || resProducts.length === 0) {
             return next(new AppError(
                 'NOT_FOUND',
                 `Can not find product, ask for administrator`,
                 true,
             ));
         }
-
-        const count = await Products.countDocuments();
-
+        await Products.countDocuments();
         res.json({
-            msg: 'successfully founded products for category' + category.title,
-            products: foundedProductsByCategory,
-            page,
+            msg: 'successfully founded products for category ' + category.title,
+            products: resProducts,
+            skip: start,
             limit,
-            total: count,
+            total: resProducts.length,
         });
     } catch (err) {
         const error = AppError.isAppError(err)
@@ -205,8 +204,8 @@ const listCategories = async (
 
         res.json({
             msg: 'successfully founded categories',
-            products: foundedCategories,
-            page,
+            categories: foundedCategories,
+            skip: limit * (page - 1),
             limit,
             total: count,
         });

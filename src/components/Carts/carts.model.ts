@@ -1,12 +1,13 @@
 import { model, Schema } from 'mongoose';
 import { Products } from '../Products/products.model';
+import { AppError } from '../../utils/Errors/AppError';
 
 export interface ICart {
     user: string,
-    total: number,
-    discountedTotal: number,
-    totalProducts: number,
-    totalQuantity: number,
+    total?: number,
+    discountedTotal?: number,
+    totalProducts?: number,
+    totalQuantity?: number,
     products: {
         quantity: number,
         product: string
@@ -32,6 +33,13 @@ cartsSchema.pre('save', async function(next) {
     const { totalPrice, totalProducts, discountedPrice } = this.products.reduce((acc, product) => {
             const p = products.find(prod => prod._id.toString() === product.product.toString());
             if (!p) return acc;
+            if (p.stock < product.quantity) {
+                throw new AppError(
+                    'BAD_ENTRY',
+                    `Not enough ${p.title} in stock, asked : ${product.quantity} and available : ${p.stock}`,
+                    true,
+                );
+            }
             console.log('accumulator', acc);
             console.log('product : ', p);
             console.log(`${acc.discountedPrice} + ${product.quantity} * ${p.price} * (1 - ${p.discountPercentage} / 100) = ${acc.discountedPrice + product.quantity * p.price * (1 - p.discountPercentage / 100)}`)

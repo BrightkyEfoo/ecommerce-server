@@ -33,14 +33,14 @@ const updateProduct = async (id: string, updateObj: any) => {
     }
 };
 
-const searchProducts = async (str: string, limit = 10) => {
+const searchProducts = async (str: string) => {
     try {
         return await Products.find({
             $text: {
                 $search: str,
                 $caseSensitive: false,
             },
-        }).limit(limit);
+        }).exec();
     } catch (e) {
         console.error(`An error occurred while searching for products: ${e.message}`);
         return 1 as const;

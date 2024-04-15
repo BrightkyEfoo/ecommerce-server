@@ -25,6 +25,27 @@ const categoriesZodSchema = {
             id: string(),
         }),
     }),
+    getOne: object({
+        params: object({
+            id: string(),
+        }),
+    }),
+    getAllProducts: object({
+        params: object({
+            id: string(),
+        }),
+        query: object({
+            limit: string().regex(/^\d+$/).optional(),
+            page: string().regex(/^\d+$/).optional(),
+        }).optional(),
+    }),
+    getAll: object({
+        query: object({
+            limit: string().regex(/^\d+$/).optional(),
+            page: string().regex(/^\d+$/).optional(),
+        }).optional(),
+    }),
+
 };
 
 

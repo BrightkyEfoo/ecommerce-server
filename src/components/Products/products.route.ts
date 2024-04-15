@@ -25,13 +25,21 @@ router
         ],
         productsController.create,
     )
-    .get(productsController.list);
+    .get(
+        validate(productsZodSchemas.list),
+        productsController.list,
+    );
 
-router.route('/search').get(productsController.search);
+router.route('/search')
+    .get(
+        validate(productsZodSchemas.search),
+        productsController.search,
+    );
 
 router.use(authToken)
     .route('/:id')
-    .put([
+    .put(
+        [
             verifyRolesMiddleware([
                 {
                     obj: 'products',
@@ -40,19 +48,28 @@ router.use(authToken)
             ]),
             uploadM,
             hydradeBody,
+            validate(productsZodSchemas.update),
         ],
-        productsController.update)
+        productsController.update,
+    )
     .delete(
-        verifyRolesMiddleware([
-            {
-                obj: 'products',
-                permissions: ['delete'],
-            },
-        ]),
-        productsController.delete);
+        [
+            verifyRolesMiddleware([
+                {
+                    obj: 'products',
+                    permissions: ['delete'],
+                },
+            ]),
+            validate(productsZodSchemas.delete),
+        ],
+        productsController.delete,
+    );
 
-router
-    .route('/:id').get(productsController.read);
+router.route('/:id')
+    .get(
+        validate(productsZodSchemas.readById),
+        productsController.read,
+    );
 
 export { router as productsRouter };
 

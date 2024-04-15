@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { authToken } from '../../middlewares/jwt';
 import { verifyRolesMiddleware } from '../../middlewares/verifyRoles';
-import { hydradeBody, upload } from '../../middlewares/fileStore';
+import { hydradeBody, uploadSingle } from '../../middlewares/fileStore';
 import { validate } from '../../middlewares/validate';
 import { categoriesZodSchema } from './categories.zod';
 import { categoriesController } from './categories.controller';
@@ -19,14 +19,17 @@ router
                     permissions: ['create'],
                 },
             ]),
-            upload.single('image'),
+            uploadSingle('image'),
             hydradeBody,
             validate(categoriesZodSchema.create),
         ],
         categoriesController.create,
     )
 
-    .get(categoriesController.list);
+    .get(
+        validate(categoriesZodSchema.getAll),
+        categoriesController.list,
+    );
 
 router.use(authToken).route('/:id')
     .put([
@@ -36,26 +39,33 @@ router.use(authToken).route('/:id')
                     permissions: ['update'],
                 },
             ]),
-            upload.single('image'),
+            uploadSingle('image'),
             hydradeBody,
             validate(categoriesZodSchema.update),
         ],
         categoriesController.update)
 
     .delete([
-        verifyRolesMiddleware([
-            {
-                obj: 'categories',
-                permissions: ['delete'],
-            },
-        ]),
-        validate(categoriesZodSchema.delete),
-    ], categoriesController.delete);
+            verifyRolesMiddleware([
+                {
+                    obj: 'categories',
+                    permissions: ['delete'],
+                },
+            ]),
+            validate(categoriesZodSchema.delete),
+        ],
+        categoriesController.delete);
 
 
-router.route('/:id').get(categoriesController.read);
+router.route('/:id').get(
+    validate(categoriesZodSchema.getOne),
+    categoriesController.read,
+);
 
-router.route(['/:id/products', '/:id/product']).get(categoriesController.listProducts);
+router.route(['/:id/products', '/:id/product']).get(
+    validate(categoriesZodSchema.getAllProducts),
+    categoriesController.listProducts,
+);
 
 export { router as categoriesRouter };
 

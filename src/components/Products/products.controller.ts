@@ -147,6 +147,7 @@ const searchProducts = async (
     try {
         const { q } = req.query;
         const limit = Number(req.query.limit) ?? 10;
+        const page = Number(req.query.page) ?? 1;
         if (typeof q !== 'string')
             return next(new AppError(
                 'BAD_ENTRY',
@@ -154,7 +155,7 @@ const searchProducts = async (
                 true,
             ));
 
-        const foundedProducts = await productsService.search(q, Number(limit));
+        const foundedProducts = await productsService.search(q, Number(limit), page);
         if (foundedProducts === 1) {
             return next(new AppError(
                 'BAD_ENTRY',
@@ -162,7 +163,10 @@ const searchProducts = async (
                 true,
             ));
         }
-        if (!foundedProducts || foundedProducts.length === 0) {
+        const start = (page - 1) * limit;
+        const end = start + limit;
+        const resultProducts = foundedProducts.slice(start, end);
+        if (!foundedProducts || foundedProducts.length === 0 || resultProducts.length === 0) {
             return next(new AppError(
                 'NOT_FOUND',
                 `Can not find product, ask for administrator`,
@@ -171,7 +175,10 @@ const searchProducts = async (
         }
         return res.json({
             msg: `Result of search in products for ${q}`,
-            products: foundedProducts,
+            products: resultProducts,
+            skip: start,
+            limit,
+            total: foundedProducts.length,
         });
     } catch (err) {
         const error = AppError.isAppError(err)
@@ -217,7 +224,7 @@ const readProducts = async (
         res.json({
             msg: 'successfully founded products',
             products: foundedProducts,
-            page,
+            skip: limit * (page - 1),
             limit,
             total: count,
         });

@@ -89,7 +89,7 @@ const addCart = async (req: Request, res: Response, next: NextFunction) => {
     } catch (err) {
         const error = AppError.isAppError(err)
             ? err
-            : new AppError('ERROR', `Unknown error \nReason : ${err}`, false);
+            : new AppError('ERROR', `Unknown error \nReason : ${err}`, true);
         next(error);
     }
 };
@@ -140,7 +140,7 @@ const listCarts = async (req: Request, res: Response, next: NextFunction) => {
     } catch (err) {
         const error = AppError.isAppError(err)
             ? err
-            : new AppError('ERROR', `Unknown error \nReason : ${err}`, false);
+            : new AppError('ERROR', `Unknown error \nReason : ${err}`, true);
         next(error);
     }
 };

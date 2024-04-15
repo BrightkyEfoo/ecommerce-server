@@ -19,7 +19,10 @@ const usersSchema = new Schema<IUser>({
     },
     password: String,
     profilePicture: String,
-    roles: [Number],
+    roles: {
+        type: [Number],
+        default: [],
+    },
 });
 
 usersSchema.pre('save', async function(next) {

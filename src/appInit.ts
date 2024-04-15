@@ -23,6 +23,9 @@ app.use('/public', express.static('./public'));
 app.use([`${context}/users`, `${context}/user`], usersRouter);
 app.use([`${context}/products`, `${context}/product`], productsRouter);
 app.use([`${context}/categories`, `${context}/category`], categoriesRouter);
+app.get(['/', `${context}/`], (_req, res) => {
+    res.send('hello, welcome to this Ecommerce Api, designed by BrightkyEfoo');
+});
 app.use(errorM);
 
 export { app };

@@ -1,6 +1,7 @@
 import multer from 'multer';
 import { NextFunction, Request, Response } from 'express';
 import slugify from 'slugify';
+import { AppError } from '../utils/Errors/AppError';
 
 const storage = multer.diskStorage({
     destination: function(_req, _file, cb) {
@@ -12,6 +13,23 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
+const uploadSingle = (fieldName: string) => (req, res, next) => {
+    upload.single(fieldName)(req, res, (err) => {
+        console.log('here');
+        if (err instanceof multer.MulterError) {
+            // Erreur multer (par exemple, dépassement de la limite de fichier)
+            return res.status(400).json({ msg: 'Une erreur de téléchargement de fichier s\'est produite.', err });
+        } else if (err) {
+            // Autre erreur
+            return res.status(500).json({
+                msg: 'Une erreur s\'est produite lors du téléchargement de fichier.',
+                err,
+            });
+        }
+        next();
+    });
+};
 const uploadM = (req, res, next) => {
     upload.fields([
         { name: 'thumbnail', maxCount: 1 }, // Un seul fichier pour le champ "thumbnail"
@@ -32,35 +50,44 @@ const uploadM = (req, res, next) => {
 };
 
 const hydradeBody = async (req: Request, res: Response, next: NextFunction) => {
-    req.body = JSON.parse(req.body.body);
-    if (!req.body.update) req.body.update = {};
+    try {
+        req.body = JSON.parse(req.body.body);
+        console.log(req.body);
+        if (!req.body.update) req.body.update = {};
 
-    if (req.files) {
-        Object.keys(req.files).forEach(key => {
-            if (req.files) {
-                if (req.files[key].length > 1 || key.endsWith('s')) {
-                    req.body[key] = req.files[key].map(file => {
-                        return `${process.env.API_URI}/${file.path}`;
-                    });
-                    req.body.update[key] = req.files[key].map(file => {
-                        return `${process.env.API_URI}/${file.path}`;
-                    });
-                } else if (req.files[key].length === 1) {
-                    req.body[key] = `${process.env.API_URI}/${req.files[key][0].path}`;
-                    req.body.update[key] = `${process.env.API_URI}/${req.files[key][0].path}`;
+        if (req.files) {
+            Object.keys(req.files).forEach(key => {
+                if (req.files) {
+                    if (req.files[key].length > 1 || key.endsWith('s')) {
+                        req.body[key] = req.files[key].map(file => {
+                            return `${process.env.API_URI}/${file.path}`;
+                        });
+                        req.body.update[key] = req.files[key].map(file => {
+                            return `${process.env.API_URI}/${file.path}`;
+                        });
+                    } else if (req.files[key].length === 1) {
+                        req.body[key] = `${process.env.API_URI}/${req.files[key][0].path}`;
+                        req.body.update[key] = `${process.env.API_URI}/${req.files[key][0].path}`;
+                    }
                 }
-            }
-        });
-    } else if (req.file) {
-        req.body[req.file.fieldname] = `${process.env.API_URI}/${req.file.path}`;
-        req.body.update[req.file.fieldname] = `${process.env.API_URI}/${req.file.path}`;
-    }
+            });
+        } else if (req.file) {
+            req.body[req.file.fieldname] = `${process.env.API_URI}/${req.file.path}`;
+            req.body.update[req.file.fieldname] = `${process.env.API_URI}/${req.file.path}`;
+        }
 
-    next();
+        next();
+    } catch (err) {
+        if (err.name === 'SyntaxError') {
+            console.log('err');
+            return next(new AppError('BAD_ENTRY', `body is not provided or inconsitent, it should be a valid JSON string`, true));
+        }
+        next(new AppError('ERROR', `Unknow expection when uploading file`, false));
+    }
 };
 
 
-export { upload, uploadM, hydradeBody };
+export { upload, uploadM, hydradeBody, uploadSingle };
 
 // app.post('/upload', upload.fields([
 //     { name: 'thumbnail', maxCount: 1 }, // Un seul fichier pour le champ "thumbnail"
