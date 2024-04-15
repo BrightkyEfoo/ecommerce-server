@@ -98,7 +98,7 @@ insufficient permissions.
 Clone repo first, then open a terminal at the root of the project and then run the command
 
 ```bash
-docker compose up --build
+docker compose -f ./docker-compose.yaml up -d
 ```
 
 and then try open [http://localhost:9000](http://localhost:9000)

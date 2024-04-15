@@ -1,0 +1,26 @@
+services:
+  server:
+    container_name: server
+    build:
+      context: .
+    environment:
+      NODE_ENV: production
+      PRIVATE_KEY: super_private_key#
+      DB_URI: mongodb://root:brightkyefoo@localhost:27017/ecommerce?authSource=admin
+      PORT: 9000
+      API_URI: http://5.189.158.182:9000
+
+    ports:
+      - 9000:9000
+    depends_on:
+      - db
+
+  db:
+    container_name: mongo_server
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: brightkyefoo
+    ports:
+      - 27017:27017
