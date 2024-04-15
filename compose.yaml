@@ -4,10 +4,10 @@ services:
       image: server:latest
     environment:
       NODE_ENV: production
-      PRIVATE_KEY: ${PRIVATE_KEY}
-      DB_URI: ${DB_URI}
-      PORT: ${PORT}
-      API_URI: ${API_URI}
+      PRIVATE_KEY: super_private_key#
+      DB_URI: mongodb://root:brightkyefoo@localhost:27017/ecommerce?authSource=admin
+      PORT: 9000
+      API_URI: http://5.189.158.182:9000
 
     ports:
       - 9000:9000
