@@ -166,12 +166,6 @@ const searchProducts = async (
         const start = (page - 1) * limit;
         const end = start + limit;
         const resultProducts = foundedProducts.slice(start, end);
-        console.log({
-            start,
-            end,
-            foundedProducts,
-            resultProducts,
-        });
         if (!foundedProducts || foundedProducts.length === 0 || resultProducts.length === 0) {
             return next(new AppError(
                 'NOT_FOUND',

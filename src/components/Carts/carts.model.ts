@@ -41,10 +41,6 @@ cartsSchema.pre('save', async function(next) {
                     true,
                 );
             }
-            console.log('accumulator', acc);
-            console.log('product : ', p);
-            console.log(`${acc.discountedPrice} + ${product.quantity} * ${p.price} * (1 - ${p.discountPercentage} / 100) = ${acc.discountedPrice + product.quantity * p.price * (1 - p.discountPercentage / 100)}`)
-            ;
             return {
                 totalPrice: acc.totalPrice + product.quantity * p.price,
                 totalProducts: acc.totalProducts + product.quantity,

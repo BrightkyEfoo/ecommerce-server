@@ -16,7 +16,6 @@ const upload = multer({ storage: storage });
 
 const uploadSingle = (fieldName: string) => (req: Request, res: Response, next: NextFunction) => {
     upload.single(fieldName)(req, res, (err) => {
-        console.log('here');
         if (err instanceof multer.MulterError) {
             // Erreur multer (par exemple, dépassement de la limite de fichier)
             return res.status(400).json({ msg: 'Une erreur de téléchargement de fichier s\'est produite.', err });
@@ -52,7 +51,6 @@ const uploadM = (req: Request, res: Response, next: NextFunction) => {
 const hydradeBody = async (req: Request, res: Response, next: NextFunction) => {
     try {
         req.body = JSON.parse(req.body.body);
-        console.log(req.body);
         if (!req.body.update) req.body.update = {};
 
         const files = req.files as { [fieldname: string]: Express.Multer.File[] };
@@ -89,68 +87,3 @@ const hydradeBody = async (req: Request, res: Response, next: NextFunction) => {
 
 
 export { upload, uploadM, hydradeBody, uploadSingle };
-
-// app.post('/upload', upload.fields([
-//     { name: 'thumbnail', maxCount: 1 }, // Un seul fichier pour le champ "thumbnail"
-//     { name: 'images', maxCount: 10 }    // Jusqu'à 10 fichiers pour le champ "images"
-//   ]), (req, res) => {
-//     // `req.files` contient les informations sur les fichiers téléchargés
-//     console.log('Fichier thumbnail téléchargé:', req.files['thumbnail'][0]);
-//     console.log('Fichiers images téléchargés:', req.files['images']);
-
-//     // Réponse au client
-//     res.send('Fichiers téléchargés avec succès.');
-//   });
-
-// const MonComposant = () => {
-//     const [thumbnail, setThumbnail] = useState(null);
-//     const [images, setImages] = useState([]);
-
-//     const handleSubmit = async (event) => {
-//       event.preventDefault();
-
-//       const formData = new FormData();
-//       formData.append('thumbnail', thumbnail);
-
-//       images.forEach((image) => {
-//         formData.append('images', image);
-//       });
-
-//       try {
-//         const response = await axios.post('URL_de_votre_endpoint', formData, {
-//           headers: {
-//             'Content-Type': 'multipart/form-data'
-//           }
-//         });
-//         console.log('Réponse du serveur:', response.data);
-//       } catch (error: any) {
-//         console.error('Erreur lors de l\'envoi du formulaire:', error);
-//       }
-//     };
-
-//     const handleThumbnailChange = (event) => {
-//       setThumbnail(event.target.files[0]);
-//     };
-
-//     const handleImagesChange = (event) => {
-//       setImages([...event.target.files]);
-//     };
-
-//     return (
-//       <form onSubmit={handleSubmit}>
-//         <label>
-//           Thumbnail:
-//           <input type="file" onChange={handleThumbnailChange} />
-//         </label>
-//         <br />
-//         <label>
-//           Images:
-//           <input type="file" multiple onChange={handleImagesChange} />
-//         </label>
-//         <br />
-//         <button type="submit">Envoyer</button>
-//       </form>
-//     );
-//   };
-
-//   export default MonComposant;

@@ -21,7 +21,6 @@ const deleteCategory = async (id: string) => {
 const update = async (id: string, update: any) => {
     try {
         const res = await Categories.findByIdAndUpdate(id, update, { new: true }).exec();
-        console.log('res', res);
         return res;
 
     } catch (err: any) {
