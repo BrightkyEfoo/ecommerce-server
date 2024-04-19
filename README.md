@@ -7,6 +7,17 @@ categories.
 Note that this is only for test-purposes
 Notice that and online version is available at [api](http://5.189.158.182:9000/)
 
+
+## Getting Started
+
+Clone repo first, then open a terminal at the root of the project and then run the command
+
+```bash
+docker compose -f ./docker-compose.yaml up -d
+```
+
+and then try open [http://localhost:9000](http://localhost:9000)
+
 ## **Project Structure**
 
 This section provides an overview of the project's folder structure, helping you navigate the codebase effectively.
@@ -63,6 +74,7 @@ JWT authentication
 
 The E-commerce Express API implements role-based access control (RBAC) to manage user permissions and secure API
 endpoints. This mechanism ensures that users can only perform actions within the scope of their assigned roles.
+You can go to the root repository project [here](https://github.com/ecommerce)
 
 ### **Roles and Permissions**
 
@@ -95,12 +107,4 @@ Consider a scenario where an admin user attempts to create a product. Since admi
 the request is successful. However, if a regular user tries the same action, they would receive an error indicating
 insufficient permissions.
 
-## Getting Started
-
-Clone repo first, then open a terminal at the root of the project and then run the command
-
-```bash
-docker compose -f ./docker-compose.yaml up -d
-```
-
-and then try open [http://localhost:9000](http://localhost:9000)
+**`@BrightkyEfoo`**
