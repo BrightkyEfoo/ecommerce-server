@@ -7,7 +7,7 @@ import { productsRouter } from './components/Products/products.route';
 import { errorM } from './middlewares/errorM';
 import { categoriesRouter } from './components/categories/categories.route';
 import { homeHTML } from './constants/app';
-import favicon from 'serve-favicon';
+//import favicon from 'serve-favicon';
 
 config();
 const app = express();
@@ -20,7 +20,7 @@ const appName = 'api';
 const context = `/${appName}/${version}`;
 
 app.use('/public', express.static('./public'));
-app.use(favicon('./public/images/favicon.ico'));
+//app.use(favicon('./public/images/favicon.ico'));
 
 app.use([`${context}/users`, `${context}/user`], usersRouter);
 app.use([`${context}/products`, `${context}/product`], productsRouter);
