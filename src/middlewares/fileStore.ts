@@ -80,7 +80,7 @@ const hydradeBody = async (req: Request, res: Response, next: NextFunction) => {
         next();
     } catch (err: any) {
         if (err.name === 'SyntaxError') {
-            console.log('err');
+            console.log('err', err);
             return next(new AppError('BAD_ENTRY', `body is not provided or inconsitent, it should be a valid JSON string`, true));
         }
         next(new AppError('ERROR', `Unknow expection when uploading file`, false));
