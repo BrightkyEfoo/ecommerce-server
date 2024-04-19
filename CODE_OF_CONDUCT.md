@@ -42,7 +42,7 @@ project communication channels, participating in community discussions, or atten
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team
-at [insert email address]. All reports will be reviewed and investigated, and appropriate actions will be taken in
+at brightefoo@gmail.com. All reports will be reviewed and investigated, and appropriate actions will be taken in
 accordance with the circumstances. The project team is committed to maintaining confidentiality with respect to the
 reporter of any incident.
 
