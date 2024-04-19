@@ -10,6 +10,20 @@ Notice that and online version is available at [api](http://5.189.158.182:9000/)
 
 ## Getting Started
 
+### Dev
+First ensure that you have nodeJs and npm installed on your machine, If not you can see how to get them installed [here](https://nodejs.org/en/download/current)
+Clone repo first, then open a terminal at the root of the project and then run the command
+then install all dependencies with
+```bash
+npm i
+```
+After this start the project by running the command
+```bash
+npm run dev
+```
+NB: Ensure that the port 9000 is not already in use! If it is, then try changing the port inside the [env file](.env)
+### Prod
+
 Clone repo first, then open a terminal at the root of the project and then run the command
 
 ```bash
