@@ -155,11 +155,11 @@ const mock = async (index: number) => {
     await Users.findOneAndDelete({ email: 'brightefoo@gmail.com' });
 
     console.log(`${!!categories} , ${!!products}`);
-//    const catPromises = categories.map(async (category) => {
-//        return await Categories.create(category);
-//    });
-//
-//    await Promise.all(catPromises);
+   const catPromises = categories.map(async (category) => {
+       return await Categories.create(category);
+   });
+
+   await Promise.all(catPromises);
 
     const prodPromises = products.map(async el => await Products.create(el));
 
