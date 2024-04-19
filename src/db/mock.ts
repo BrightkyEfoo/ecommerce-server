@@ -194,7 +194,7 @@ const mock = async (index: number) => {
     password: 'brightkyefoo',
     firstName: 'bright',
     lastName: 'efoo',
-    profilePicture: process.env.API_URI + '/public/images/bright.jpeg',
+    profilePicture: 'https://avatars.githubusercontent.com/u/108243838?v=4',
     roles: [1, 2, 3],
   });
 
