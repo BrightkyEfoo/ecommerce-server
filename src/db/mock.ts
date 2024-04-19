@@ -1,6 +1,6 @@
 import { Users } from '../components/Users/users.model';
-//import { IProduct, Products } from '../components/Products/products.model';
-//import { Categories, ICategory } from '../components/categories/categories.model';
+import { IProduct, Products } from '../components/Products/products.model';
+import { Categories, ICategory } from '../components/categories/categories.model';
 
 const products: ({
     discountPercentage: number;
