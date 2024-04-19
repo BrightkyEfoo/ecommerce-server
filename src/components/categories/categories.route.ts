@@ -31,6 +31,18 @@ router
         categoriesController.list,
     );
 
+
+router.route('/:id').get(
+    validate(categoriesZodSchema.getOne),
+    categoriesController.read,
+);
+
+router.route(['/:id/products', '/:id/product']).get(
+    validate(categoriesZodSchema.getAllProducts),
+    categoriesController.listProducts,
+);
+
+
 router.use(authToken).route('/:id')
     .put([
             verifyRolesMiddleware([
@@ -56,16 +68,6 @@ router.use(authToken).route('/:id')
         ],
         categoriesController.delete);
 
-
-router.route('/:id').get(
-    validate(categoriesZodSchema.getOne),
-    categoriesController.read,
-);
-
-router.route(['/:id/products', '/:id/product']).get(
-    validate(categoriesZodSchema.getAllProducts),
-    categoriesController.listProducts,
-);
 
 export { router as categoriesRouter };
 
