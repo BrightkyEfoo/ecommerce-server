@@ -21,7 +21,7 @@ const appName = 'api';
 const context = `/${appName}/${version}`;
 
 app.use('/public', express.static('./public'));
-app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
+app.use(favicon('./public/images/favicon.ico'));
 
 app.use([`${context}/users`, `${context}/user`], usersRouter);
 app.use([`${context}/products`, `${context}/product`], productsRouter);
