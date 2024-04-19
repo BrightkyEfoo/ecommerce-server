@@ -7,7 +7,6 @@ import { productsRouter } from './components/Products/products.route';
 import { errorM } from './middlewares/errorM';
 import { categoriesRouter } from './components/categories/categories.route';
 import { homeHTML } from './constants/app';
-import path from 'path';
 import favicon from 'serve-favicon';
 
 config();
