@@ -183,11 +183,11 @@ const mock = async (index: number) => {
   });
 
   await Promise.all(catPromises);
+  for (let i = 0; i < 2; i++) {
+    const prodPromises = products.map(async el => await Products.create(el));
 
-  const prodPromises = products.map(async el => await Products.create(el));
-
-  await Promise.all(prodPromises);
-  await Promise.all(prodPromises);
+    await Promise.all(prodPromises);
+  }
 
   await Users.create({
     email: 'brightefoo@gmail.com',
