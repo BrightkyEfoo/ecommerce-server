@@ -34,6 +34,8 @@ COPY --from=deps /usr/src/app/node_modules ./node_modules
 
 COPY --from=build /usr/src/app/dist ./dist
 
+USER root
+
 RUN mkdir -p /usr/src/app/public/images
 
 RUN chmod -R a+rw /usr/src/app/public/images
