@@ -1,6 +1,6 @@
 import { Users } from '../components/Users/users.model';
-import { IProduct, Products } from '../components/Products/products.model';
-import { Categories, ICategory } from '../components/categories/categories.model';
+//import { IProduct, Products } from '../components/Products/products.model';
+//import { Categories, ICategory } from '../components/categories/categories.model';
 
 const products: ({
     discountPercentage: number;
@@ -154,11 +154,12 @@ const categories: ICategory[] = [
 const mock = async (index: number) => {
     await Users.findOneAndDelete({ email: 'brightefoo@gmail.com' });
 
-    const catPromises = categories.map(async (category) => {
-        return await Categories.create(category);
-    });
-
-    await Promise.all(catPromises);
+    console.log(`${!!categories} , ${!!products}`);
+//    const catPromises = categories.map(async (category) => {
+//        return await Categories.create(category);
+//    });
+//
+//    await Promise.all(catPromises);
 
     const prodPromises = products.map(async el => await Products.create(el));
 
@@ -169,7 +170,7 @@ const mock = async (index: number) => {
         password: 'brightkyefoo',
         firstName: 'bright',
         lastName: 'efoo',
-        profilePicture: 'http://localhost:9000/public/images/bright.jpeg',
+        profilePicture: process.env.API_URI + '/public/images/bright.jpeg',
         roles: [1, 2, 3],
     });
 
