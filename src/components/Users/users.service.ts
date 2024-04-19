@@ -27,7 +27,6 @@ const login = async (credentials: { email: string; password: string }) => {
 
         const user = await Users.findOne({ email });
         if (!user) {
-            // user not found
             return 1 as const;
         }
 
@@ -37,7 +36,6 @@ const login = async (credentials: { email: string; password: string }) => {
         );
 
         if (!resultOfComparison) {
-            // password dont match
             return 2 as const;
         }
 

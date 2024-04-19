@@ -1,9 +1,8 @@
-import { NextFunction, Request, Response } from 'express';
-import { AppError } from '../utils/Errors/AppError';
+import { NextFunction, Response } from 'express';
 import { Roles, TPermission } from '../constants/Roles';
+import { AppError } from '../utils/Errors/AppError';
 import { verifyRoles } from '../utils/verifyRoles';
 
-/** this middleware assume that the user already loggend in it will raise an error and stop immediately the resquest with a 400 status */
 const verifyRolesMiddleware =
     (wantedPermissions: TPermission[]) =>
         (req: any, _res: Response, next: NextFunction) => {
@@ -19,9 +18,7 @@ const verifyRolesMiddleware =
                 );
             }
 
-            // Parcourir chaque permission demandée
             for (const permission of wantedPermissions) {
-                // Vérifier chaque rôle de l'utilisateur
                 for (const roleId of userRoles) {
                     const rolePermissions = Roles[roleId];
                     if (!rolePermissions) {
@@ -48,7 +45,6 @@ const verifyRolesMiddleware =
                 );
             }
 
-            // Si toutes les vérifications réussissent, passer à l'étape suivante
             next();
         };
 

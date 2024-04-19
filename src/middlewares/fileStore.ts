@@ -17,10 +17,8 @@ const upload = multer({ storage: storage });
 const uploadSingle = (fieldName: string) => (req: Request, res: Response, next: NextFunction) => {
     upload.single(fieldName)(req, res, (err) => {
         if (err instanceof multer.MulterError) {
-            // Erreur multer (par exemple, dépassement de la limite de fichier)
             return res.status(400).json({ msg: 'Une erreur de téléchargement de fichier s\'est produite.', err });
         } else if (err) {
-            // Autre erreur
             return res.status(500).json({
                 msg: 'Une erreur s\'est produite lors du téléchargement de fichier.',
                 err,
@@ -31,14 +29,12 @@ const uploadSingle = (fieldName: string) => (req: Request, res: Response, next: 
 };
 const uploadM = (req: Request, res: Response, next: NextFunction) => {
     upload.fields([
-        { name: 'thumbnail', maxCount: 1 }, // Un seul fichier pour le champ "thumbnail"
-        { name: 'images', maxCount: 10 }, // Jusqu'à 10 fichiers pour le champ "images"
+        { name: 'thumbnail', maxCount: 1 },
+        { name: 'images', maxCount: 10 },
     ])(req, res, (err) => {
         if (err instanceof multer.MulterError) {
-            // Erreur multer (par exemple, dépassement de la limite de fichier)
             return res.status(400).json({ msg: 'Une erreur de téléchargement de fichier s\'est produite.', err });
         } else if (err) {
-            // Autre erreur
             return res.status(500).json({
                 msg: 'Une erreur s\'est produite lors du téléchargement de fichier.',
                 err,

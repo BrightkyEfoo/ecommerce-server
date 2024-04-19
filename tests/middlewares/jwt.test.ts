@@ -7,7 +7,6 @@ import { NextFunction } from 'express';
 
 describe('JWT Middleware', () => {
     it('should', async () => {
-        // get a real response from the register api with token
         const user = {
             email: 'brightefoo@gmail.com',
             password: 'brightkyefoo',

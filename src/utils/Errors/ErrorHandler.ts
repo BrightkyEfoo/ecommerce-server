@@ -15,10 +15,7 @@ class ErrorHandler {
         responseStream: Response,
     ): Promise<void> {
         this.logger.error(error, 'Whoops !');
-        // we xan start metrics here
         await this.crashIfBadError(error, responseStream);
-
-        // here is not a bad error
         responseStream.status(commonTypes[error.commonType]).json({
             msg: error.message,
         });
@@ -30,8 +27,6 @@ class ErrorHandler {
     private async crashIfBadError(error: AppError, responseStream: Response) {
         if (error.isOperational) return;
         await disconnect();
-
-        // exit process
         process.exit(1);
     }
 }

@@ -37,7 +37,6 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
             );
         }
 
-        // generate JWT token
         const private_key = process.env.PRIVATE_KEY;
         if (!private_key) {
             throw new AppError(
