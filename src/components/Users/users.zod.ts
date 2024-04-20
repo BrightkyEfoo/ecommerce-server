@@ -18,7 +18,7 @@ const userZodSchemas = {
 
     addCart: object({
         params: object({
-            id: string(),
+            userId: string(),
         }),
         body: object({
             products: array(object({
@@ -29,7 +29,7 @@ const userZodSchemas = {
     }),
     listCarts: object({
         params: object({
-            id: string(),
+            userId: string(),
         }),
     }),
 };
