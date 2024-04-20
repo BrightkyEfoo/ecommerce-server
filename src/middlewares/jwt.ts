@@ -26,7 +26,7 @@ export const authToken = (req: Request, res: Response, next: NextFunction) => {
   jwt.verify(token, private_key, (error, decodedtoken) => {
     if (error) {
       const msg = 'User not authorized';
-      return res.status(401).json({ msg });
+      return res.status(401).json({ msg , error });
     }
 
     if (
