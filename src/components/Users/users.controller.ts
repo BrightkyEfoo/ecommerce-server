@@ -71,7 +71,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 
 const addCart = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const id = req.params.id;
+        const id = req.params.userId;
         const user = await Users.findById(id);
         if (!user) return next(new AppError(
             'NOT_FOUND',
@@ -98,7 +98,7 @@ const listCarts = async (req: Request, res: Response, next: NextFunction) => {
         const limit = Number(req.query.limit as string) || 10;
         const page = Number(req.query.page) || 1;
         const skip = (page - 1) * limit;
-        const id = req.params.id;
+        const id = req.params.userId;
 
         const user = await Users.findById(id);
         if (!user) return next(new AppError(
