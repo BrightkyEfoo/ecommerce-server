@@ -2,6 +2,7 @@ services:
   server:
     container_name: server
     image: server:latest
+    restart: always
     networks:
       - my_network
     environment:
