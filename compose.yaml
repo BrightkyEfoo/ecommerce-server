@@ -10,7 +10,7 @@ services:
       PRIVATE_KEY: super_private_key#
       DB_URI: mongodb://mongo_server:27017/ecommerce?authSource=admin
       PORT: 9000
-      API_URI: http://5.189.158.182:9000
+      API_URI: http://156.67.29.20:9000
       DB_USER: root
       DB_PASSWORD: brightkyefoo
     ports:
